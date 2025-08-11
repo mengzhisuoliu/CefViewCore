@@ -50,13 +50,15 @@ jobs:
         # See https://cmake.org/cmake/help/latest/variable/CMAKE_BUILD_TYPE.html?highlight=cmake_build_type
         run: |
           cmake \
-          -B ${{github.workspace}}/build \
+          -DCMAKE_C_COMPILER=clang \
+          -DCMAKE_CXX_COMPILER=clang++ \
           -DCMAKE_CXX_FLAGS=-stdlib=libc++ \
+          -B ${{github.workspace}}/build \
           -DPROJECT_ARCH=arm64 \
           -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} \
           -DUSE_SANDBOX=ON \
           -DCEFVIEW_WING_NAME=UCefViewHelper \
-          -DCEF_SDK_VERSION="126.2.18+g3647d39+chromium-126.0.6478.183" \
+          -DCEF_SDK_VERSION="126.2.18+g3647d39+chromium-126.0.6478.83" \
           -DCMAKE_INSTALL_PREFIX:PATH=${{github.workspace}}/install
 
       - name: Build
